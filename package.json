@@ -1,0 +1,14 @@
+{
+  "name": "react-frame",
+  "version": "0.0.1",
+  "description": "react脚手架",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "郭军伟",
+  "license": "ISC"
+}
