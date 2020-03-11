@@ -5,14 +5,17 @@
  * @lastEditTime: Do not edit
  */
 const path = require('path');
-const devServer = require('./src/config/devServer');
+const devServer = require('./config/devServer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
+const isDev = process.env.NODE_ENV === 'development';
+
 const webpackConfig = {
-  mode: 'development',
+  mode: isDev ? 'development' : 'production',
+  devtool: isDev ? "cheap-module-eval-source-map" : "none",
   entry: './src/layout/index.jsx',
-  // devServer: devServer,
+  devServer: devServer,
   watch: true,
   output: {
     filename: '[name].[hash:8].js',
@@ -30,10 +33,16 @@ const webpackConfig = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         include: path.resolve(__dirname, 'src'),
+        use: 'babel-loader'
+      },
+      {
+        test: /\.less$/,
+        exclude: /node_modules/,
         use: [
-          {
-            loader: 'babel-loader',
-          }
+          "style-loader",
+          "css-loader",
+          "postcss-loader",
+          "less-loader"
         ]
       }
     ]

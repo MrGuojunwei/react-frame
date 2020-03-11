@@ -8,7 +8,7 @@ class Layout extends React.Component {
 
     render() {
         return (
-            <div>hello react fff</div>
+            <div className="react">hello react fff</div>
         )
     }
 }
