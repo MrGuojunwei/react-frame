@@ -5,12 +5,15 @@
  * @lastEditTime: Do not edit
  */
 const path = require('path');
+const devServer = require('./src/config/devServer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const webpackConfig = {
   mode: 'development',
   entry: './src/layout/index.jsx',
+  // devServer: devServer,
+  watch: true,
   output: {
     filename: '[name].[hash:8].js',
     path: path.resolve(__dirname, 'dist'),
