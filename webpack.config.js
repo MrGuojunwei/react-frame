@@ -8,6 +8,8 @@ const path = require('path');
 const devServer = require('./config/devServer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -23,6 +25,7 @@ const webpackConfig = {
     publicPath: ''
   },
   resolve: {
+    extensions: ['.jsx', '.js'],
     alias: {
       '@': path.resolve(__dirname, 'src')
     }
@@ -39,7 +42,13 @@ const webpackConfig = {
         test: /\.less$/,
         exclude: /node_modules/,
         use: [
-          "style-loader",
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: isDev,
+              reloadAll: true
+            }
+          },
           "css-loader",
           "postcss-loader",
           "less-loader"
@@ -52,7 +61,11 @@ const webpackConfig = {
       filename: 'index.html',
       template: './public/index.html'
     }),
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].[hash:8].css'
+    }),
+    new OptimizeCssAssetsPlugin()
   ]
 }
 
