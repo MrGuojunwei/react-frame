@@ -16,7 +16,7 @@ const isDev = process.env.NODE_ENV === 'development';
 const webpackConfig = {
   mode: isDev ? 'development' : 'production',
   devtool: isDev ? "cheap-module-eval-source-map" : "none",
-  entry: './src/layout/index.jsx',
+  entry: './src/index',
   devServer: devServer,
   watch: true,
   output: {
@@ -39,14 +39,12 @@ const webpackConfig = {
         use: 'babel-loader'
       },
       {
-        test: /\.less$/,
-        exclude: /node_modules/,
+        test: /\.(less|css)$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              hmr: isDev,
-              reloadAll: true
+              hmr: isDev
             }
           },
           "css-loader",
