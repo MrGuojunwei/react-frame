@@ -23,7 +23,7 @@ const webpackConfig = {
   devtool: isDev ? "cheap-module-eval-source-map" : "none",
   entry: './src/index',
   devServer: devServer,
-  watch: isDev ? true : false,
+  cache: true,
   output: {
     filename: '[name].[hash:8].js',
     path: path.resolve(__dirname, 'dist'),
@@ -40,7 +40,6 @@ const webpackConfig = {
     rules: [
       {
         test: /\.jsx?$/,
-        exclude: /node_modules/,
         include: path.resolve(__dirname, 'src'),
         use: 'happypack/loader?id=jsx'
       },

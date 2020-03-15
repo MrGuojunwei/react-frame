@@ -13,14 +13,14 @@ class SelectForm extends BaseForm {
     }
 
     getComponent() {
-        const { options = [], config = {}, valueField = 'value', labelField = 'label' } = this.props;
+        const { options = [], config = {}, valueField = 'value', labelField = 'label', className = "" } = this.props;
 
         return (
             <Select {...config}>
                 {
                     options.map((option, index) => {
                         const { config = {} } = option;
-                        return <Option key={index} value={option[valueField]} {...config}>{option[labelField]}</Option>
+                        return <Option key={index} className={className} value={option[valueField]} {...config}>{option[labelField]}</Option>
                     })
                 }
             </Select>

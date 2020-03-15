@@ -15,9 +15,9 @@ const COMPONENTTYPE = {
 
 class InputForm extends BaseForm {
     getComponent = () => {
-        const { type = 'input', config } = this.props;
+        const { type = 'input', config, className = "" } = this.props;
         const TargetComponent = COMPONENTTYPE[type];
-        return <TargetComponent {...config} />
+        return <TargetComponent className={className} {...config} />
     }
 }
 
