@@ -1,14 +1,13 @@
 import React from 'react';
 import { Form, Row, Col, Input, Button } from 'antd';
 import { InputForm, SelectForm } from '../components';
+import LoginLayout from '@/layouts/LoginLayout';
 
 const formItemLayout = {
     labelCol: {
-        xs: { span: 24 },
         sm: { span: 7 }
     },
     wrapperCol: {
-        xs: { span: 24 },
         sm: { span: 17 }
     }
 }
@@ -65,10 +64,13 @@ class App extends React.Component {
 
     render() {
         return (
-            <Form>
-                {this.getForm()}
-                <Button type='primary' onClick={this.handleSubmit}>提交</Button>
-            </Form>
+            <LoginLayout>
+                <Form>
+                    {this.getForm()}
+                    <Button type='primary' onClick={this.handleSubmit}>提交</Button>
+                </Form>
+            </LoginLayout>
+
         )
     }
 }

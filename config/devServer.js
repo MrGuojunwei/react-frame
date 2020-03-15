@@ -1,12 +1,17 @@
 const devServer = {
     historyApiFallback: true,
-    host: '0.0.0.0',
+    host: 'localhost',
     hot: true,
     open: true,
     overlay: true,
     port: 1000,
-    stats: "errors-only",
-    useLocalIp: true,
+    quiet: true,
+    stats: {
+        warning: true,
+        buildAt: true,
+        errors: true,
+        assets: true
+    },
     proxy: {
 
     }
