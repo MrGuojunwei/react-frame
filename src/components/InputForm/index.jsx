@@ -1,9 +1,5 @@
-import React from 'react';
 import { Input, InputNumber, Form } from 'antd';
 import BaseForm from '../BaseForm';
-import PropTypes from 'prop-types';
-
-const FormItem = Form.Item;
 
 const COMPONENTTYPE = {
     input: Input,
@@ -14,21 +10,41 @@ const COMPONENTTYPE = {
 }
 
 class InputForm extends BaseForm {
+    static validPropList = ['input', 'config', 'label', 'id', 'formItemLayout', 'decorator', 'form', 'defaultValue', 'value', 'status'];
+
     getComponent = () => {
-        const { type = 'input', config, className = "" } = this.props;
+        const { type = 'input', config, } = this.getValidProps(InputForm.validPropList);
+
         const TargetComponent = COMPONENTTYPE[type];
-        return <TargetComponent className={className} {...config} />
+        return <TargetComponent {...config} />
     }
+
 }
 
 InputForm.defaultProps = {
     type: 'input',
-    config: {}
+    config: {},
+    label: '',
+    id: '',
+    formItemLayout: {},
+    decorator: {},
+    form: {},
+    defaultValue: undefined,
+    value: undefined,
+    status: 'edit'
 }
 
 InputForm.propTypes = {
     type: PropTypes.oneOf(['input', 'password', 'textarea', 'number', 'search']),
     config: PropTypes.object,
+    label: PropTypes.string,
+    id: PropTypes.string.isRequired,
+    formItemLayout: PropTypes.object,
+    decorator: PropTypes.object,
+    form: PropTypes.object.isRequired,
+    defaultValue: PropTypes.any,
+    value: PropTypes.any,
+    status: PropTypes.string
 }
 
 export default InputForm;

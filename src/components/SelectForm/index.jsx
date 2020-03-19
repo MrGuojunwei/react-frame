@@ -1,26 +1,20 @@
-import React from 'react';
 import { Select } from 'antd';
 import BaseForm from '../BaseForm';
-import PropTypes from 'prop-types';
 
 const Option = Select.Option;
 
 class SelectForm extends BaseForm {
-
-    constructor(props) {
-        super(props);
-
-    }
+    static validPropList = ['options', 'config', 'valueField', 'labelField', 'label', 'id', 'formItemLayout', 'decorator', 'form', 'defaultValue', 'value', 'status'];
 
     getComponent() {
-        const { options = [], config = {}, valueField = 'value', labelField = 'label', className = "" } = this.props;
-
+        const { options = [], config = {}, valueField = 'value', labelField = 'label' } = this.getValidProps(SelectForm.validPropList);;
+        
         return (
             <Select {...config}>
                 {
                     options.map((option, index) => {
-                        const { config = {} } = option;
-                        return <Option key={index} className={className} value={option[valueField]} {...config}>{option[labelField]}</Option>
+                        const { optionConfig = {} } = option;
+                        return <Option  {...optionConfig} key={index} value={option[valueField]}>{option[labelField]}</Option>
                     })
                 }
             </Select>
@@ -29,19 +23,36 @@ class SelectForm extends BaseForm {
 }
 
 SelectForm.propTypes = {
+    id: PropTypes.string.isRequired,
     options: PropTypes.arrayOf(PropTypes.shape({
         config: PropTypes.object
     })),
     config: PropTypes.object,
     valueField: PropTypes.string,
     labelField: PropTypes.string,
+    label: PropTypes.string,
+    formItemLayout: PropTypes.object,
+    decorator: PropTypes.object,
+    form: PropTypes.object,
+    defaultValue: PropTypes.any,
+    value: PropTypes.any,
+    status: PropTypes.string
 }
 
 SelectForm.defaultProps = {
+    id: '',
     options: [],
     config: {},
     valueField: 'value',
-    labelField: 'label'
+    labelField: 'label',
+    label: '',
+    formItemLayout: {},
+    decorator: {},
+    form: {},
+    defaultValue: undefined,
+    value: undefined,
+    status: 'edit'
+
 }
 
 export default SelectForm;

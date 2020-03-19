@@ -90,6 +90,8 @@ const webpackConfig = {
   plugins: [
     new webpack.ProvidePlugin({
       React: 'react',
+      Component: ['react', 'Component'],
+      PropTypes: 'prop-types'
     }),
     new HappyPick({
       id: 'jsx',

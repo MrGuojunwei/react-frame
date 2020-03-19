@@ -1,10 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import { Form, Input } from 'antd';
 
 const FormItem = Form.Item;
 
 class BaseForm extends React.Component {
+    /**
+    * @description 获取有效的属性，防止用户传入无效的属性产生透传问题
+    */
+    getValidProps(validPropList = []) {
+        let validProps = {};
+        for (let key in this.props) {
+            if (validPropList.indexOf(key) >= 0) {
+                validProps[key] = this.props[key];
+            }
+        }
+
+        return validProps;
+    }
+
     getFieldDecorator = () => {
         const { decorator, form, value, defaultValue, id } = this.props;
         if (!form) {
@@ -42,7 +54,7 @@ class BaseForm extends React.Component {
         const { formItemLayout, label } = this.props;
         return (
             <FormItem label={label} {...formItemLayout}>
-                {this.getEditStatus()}
+                {this.getContent()}
             </FormItem>
         )
     }
