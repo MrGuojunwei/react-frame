@@ -3,22 +3,9 @@ import { Form, Input } from 'antd';
 const FormItem = Form.Item;
 
 class BaseForm extends React.Component {
-    /**
-    * @description 获取有效的属性，防止用户传入无效的属性产生透传问题
-    */
-    getValidProps(validPropList = []) {
-        let validProps = {};
-        for (let key in this.props) {
-            if (validPropList.indexOf(key) >= 0) {
-                validProps[key] = this.props[key];
-            }
-        }
-
-        return validProps;
-    }
 
     getFieldDecorator = () => {
-        const { decorator, form, value, defaultValue, id } = this.props;
+        const { id, decorator, form, value, defaultValue } = this.props;
         if (!form) {
             throw Error('form object is required')
         }
@@ -51,9 +38,33 @@ class BaseForm extends React.Component {
     }
 
     render() {
-        const { formItemLayout, label } = this.props;
+        const {
+            extra = '',
+            hasFeedback = false,
+            help,
+            htmlFor,
+            label = '',
+            labelCol = {},
+            labelAlign = 'right',
+            required,
+            validateStatus,
+            wrapperCol = {},
+            colon = true,
+        } = this.props;
         return (
-            <FormItem label={label} {...formItemLayout}>
+            <FormItem
+                extra={extra}
+                hasFeedback={hasFeedback}
+                help={help}
+                htmlFor={htmlFor}
+                label={label}
+                labelCol={labelCol}
+                labelAlign={labelAlign}
+                required={required}
+                validateStatus={validateStatus}
+                wrapperCol={wrapperCol}
+                colon={colon}
+            >
                 {this.getContent()}
             </FormItem>
         )
@@ -61,26 +72,24 @@ class BaseForm extends React.Component {
 
 }
 
-BaseForm.defaultProps = {
-    label: '',
-    id: '',
-    formItemLayout: {},
-    decorator: {},
-    form: {},
-    defaultValue: undefined,
-    value: undefined,
-    status: 'edit'
+BaseForm.propTypes = {
+    id: PropTypes.string.isRequired,
+    form: PropTypes.object,
+    decorator: PropTypes.object,
+    status: PropTypes.string,
+    value: PropTypes.any,
+    defaultValue: PropTypes.any,
+    ...FormItem.propTypes
 }
 
-BaseForm.propTypes = {
-    label: PropTypes.string,
-    id: PropTypes.string.isRequired,
-    formItemLayout: PropTypes.object,
-    decorator: PropTypes.object,
-    form: PropTypes.object,
-    defaultValue: PropTypes.any,
-    value: PropTypes.any,
-    status: PropTypes.string
+BaseForm.defaultProps = {
+    id: '',
+    form: undefined,
+    decorator: {},
+    status: 'edit',
+    value: undefined,
+    defaultValue: undefined,
+    ...FormItem.defaultProps
 }
 
 export default BaseForm;

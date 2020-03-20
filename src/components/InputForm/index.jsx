@@ -10,10 +10,29 @@ const COMPONENTTYPE = {
 }
 
 class InputForm extends BaseForm {
-    static validPropList = ['input', 'config', 'label', 'id', 'formItemLayout', 'decorator', 'form', 'defaultValue', 'value', 'status'];
 
     getComponent = () => {
-        const { type = 'input', config, } = this.getValidProps(InputForm.validPropList);
+        const {
+            type = 'input',
+            id,
+            form,
+            decorator,
+            status,
+            value,
+            defaultValue,
+            extra,
+            hasFeedback,
+            help,
+            htmlFor,
+            label,
+            labelCol,
+            labelAlign,
+            required,
+            validateStatus,
+            wrapperCol,
+            colon,
+            ...config
+        } = this.props;
 
         const TargetComponent = COMPONENTTYPE[type];
         return <TargetComponent {...config} />
@@ -21,30 +40,25 @@ class InputForm extends BaseForm {
 
 }
 
-InputForm.defaultProps = {
-    type: 'input',
-    config: {},
-    label: '',
-    id: '',
-    formItemLayout: {},
-    decorator: {},
-    form: {},
-    defaultValue: undefined,
-    value: undefined,
-    status: 'edit'
-}
-
 InputForm.propTypes = {
     type: PropTypes.oneOf(['input', 'password', 'textarea', 'number', 'search']),
-    config: PropTypes.object,
-    label: PropTypes.string,
     id: PropTypes.string.isRequired,
-    formItemLayout: PropTypes.object,
-    decorator: PropTypes.object,
     form: PropTypes.object.isRequired,
-    defaultValue: PropTypes.any,
+    decorator: PropTypes.object,
+    status: PropTypes.string,
     value: PropTypes.any,
-    status: PropTypes.string
+    defaultValue: PropTypes.any,
 }
+
+InputForm.defaultProps = {
+    type: 'input',
+    id: '',
+    form: undefined,
+    decorator: {},
+    status: 'edit',
+    value: undefined,
+    defaultValue: undefined,
+}
+
 
 export default InputForm;

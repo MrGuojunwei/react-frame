@@ -2,22 +2,39 @@ import { Radio } from 'antd';
 import BaseForm from '../BaseForm';
 
 class RadioForm extends BaseForm {
-  static validPropList = ['options', 'config', 'valueField', 'labelField', 'label', 'id', 'formItemLayout', 'decorator', 'form', 'defaultValue', 'value', 'status'];
+
 
   getComponent = () => {
-    let { config, options, valueField = 'value', labelField = 'label' } = this.getValidProps(RadioForm.validPropList);
+    const {
+      id,
+      form,
+      decorator,
+      status,
+      value,
+      defaultValue,
+      options,
+      valueField = 'value',
+      labelField = 'label',
+      extra,
+      hasFeedback,
+      help,
+      htmlFor,
+      label,
+      labelCol,
+      labelAlign,
+      required,
+      validateStatus,
+      wrapperCol,
+      colon,
+      ...config
+    } = this.props;
 
-    options = options || (config && config.options) || [];
-    if (config && config.options) {
-      delete config.options;
-    }
-    
     return (
       <Radio.Group {...config}>
         {
           options.map((option, index) => {
-            const optionConfig = option.optionConfig || {}
-            return <Radio {...optionConfig} value={option[valueField]} key={index}>{option[labelField]}</Radio>
+            const { optionConfig = {} } = option;
+            return <Radio {...optionConfig} value={option[valueField]} key={optionConfig.key || index}>{option[labelField]}</Radio>
           })
         }
       </Radio.Group>
@@ -28,34 +45,28 @@ class RadioForm extends BaseForm {
 
 RadioForm.propTypes = {
   id: PropTypes.string.isRequired,
+  form: PropTypes.object.isRequired,
+  decorator: PropTypes.object,
+  status: PropTypes.string,
+  value: PropTypes.any,
+  defaultValue: PropTypes.any,
   options: PropTypes.arrayOf(PropTypes.shape({
     optionConfig: PropTypes.object
   })),
-  config: PropTypes.object,
   valueField: PropTypes.string,
   labelField: PropTypes.string,
-  label: PropTypes.string,
-  formItemLayout: PropTypes.object,
-  decorator: PropTypes.object,
-  form: PropTypes.object.isRequired,
-  defaultValue: PropTypes.any,
-  value: PropTypes.any,
-  status: PropTypes.string
 }
 
 RadioForm.defaultProps = {
   id: '',
+  form: undefined,
+  decorator: {},
+  status: 'edit',
+  value: undefined,
+  defaultValue: undefined,
   options: [],
-  config: {},
   valueField: 'value',
   labelField: 'label',
-  label: '',
-  formItemLayout: {},
-  decorator: {},
-  form: {},
-  defaultValue: undefined,
-  value: undefined,
-  status: 'edit'
 }
 
 export default RadioForm;

@@ -4,17 +4,38 @@ import BaseForm from '../BaseForm';
 const Option = Select.Option;
 
 class SelectForm extends BaseForm {
-    static validPropList = ['options', 'config', 'valueField', 'labelField', 'label', 'id', 'formItemLayout', 'decorator', 'form', 'defaultValue', 'value', 'status'];
 
     getComponent() {
-        const { options = [], config = {}, valueField = 'value', labelField = 'label' } = this.getValidProps(SelectForm.validPropList);;
-        
+        const {
+            id,
+            form,
+            decorator,
+            status,
+            value,
+            defaultValue,
+            options = [],
+            valueField = 'value',
+            labelField = 'label',
+            extra,
+            hasFeedback,
+            help,
+            htmlFor,
+            label,
+            labelCol,
+            labelAlign,
+            required,
+            validateStatus,
+            wrapperCol,
+            colon,
+            ...config
+        } = this.props;
+
         return (
             <Select {...config}>
                 {
                     options.map((option, index) => {
                         const { optionConfig = {} } = option;
-                        return <Option  {...optionConfig} key={index} value={option[valueField]}>{option[labelField]}</Option>
+                        return <Option  {...optionConfig} key={optionConfig.key || index} value={option[valueField]}>{option[labelField]}</Option>
                     })
                 }
             </Select>
@@ -24,35 +45,28 @@ class SelectForm extends BaseForm {
 
 SelectForm.propTypes = {
     id: PropTypes.string.isRequired,
+    form: PropTypes.object.isRequired,
+    decorator: PropTypes.object,
+    status: PropTypes.string,
+    value: PropTypes.any,
+    defaultValue: PropTypes.any,
     options: PropTypes.arrayOf(PropTypes.shape({
-        config: PropTypes.object
+        optionConfig: PropTypes.object
     })),
-    config: PropTypes.object,
     valueField: PropTypes.string,
     labelField: PropTypes.string,
-    label: PropTypes.string,
-    formItemLayout: PropTypes.object,
-    decorator: PropTypes.object,
-    form: PropTypes.object,
-    defaultValue: PropTypes.any,
-    value: PropTypes.any,
-    status: PropTypes.string
 }
 
 SelectForm.defaultProps = {
     id: '',
+    form: undefined,
+    decorator: {},
+    status: 'edit',
+    value: undefined,
+    defaultValue: undefined,
     options: [],
-    config: {},
     valueField: 'value',
     labelField: 'label',
-    label: '',
-    formItemLayout: {},
-    decorator: {},
-    form: {},
-    defaultValue: undefined,
-    value: undefined,
-    status: 'edit'
-
 }
 
 export default SelectForm;
