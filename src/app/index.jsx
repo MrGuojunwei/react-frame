@@ -1,7 +1,8 @@
-import React, { Suspense } from 'react';
+import { Suspense } from 'react';
 import { Form, Row, Col, Input, Button } from 'antd';
+import SystemLayout from '@/layouts/SystemLayout';
 
-const SystemLayout = lazy(() => import('@/layouts/SystemLayout'));
+const User = lazy(() => import('@/pages/User'));
 
 class App extends React.Component {
     constructor(props) {
@@ -11,7 +12,9 @@ class App extends React.Component {
     render() {
         return (
             <Suspense fallback={<div>loading</div>}>
-                <SystemLayout />
+                <SystemLayout>
+                    <User />
+                </SystemLayout>
             </Suspense>
 
         )

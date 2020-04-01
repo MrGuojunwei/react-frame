@@ -40,8 +40,11 @@ class SystemLayout extends Component {
                             <Breadcrumb.Item>Home</Breadcrumb.Item>
                             <Breadcrumb.Item>Application Center</Breadcrumb.Item>
                             <Breadcrumb.Item>Application List</Breadcrumb.Item>
-                            <Breadcrumb.Item>An Application</Breadcrumb.Item>
+                            <Breadcrumb.Item>An AppFlication</Breadcrumb.Item>
                         </BreadcrumbWrap>
+                        <ContentWrap>
+                            {this.props.children}
+                        </ContentWrap>
                     </ContentLayout>
                 </Layout>
             </Layout>
@@ -90,4 +93,8 @@ const ContentLayout = styled(Content)`
 const BreadcrumbWrap = styled(Breadcrumb)`
     margin: 16px 0 16px 16px;
 
+`
+
+const ContentWrap = styled.div`
+    padding: 16px;
 `
