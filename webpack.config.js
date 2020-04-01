@@ -11,6 +11,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const Visualizer = require('webpack-visualizer-plugin');
 const webpack = require('webpack')
 const HappyPick = require('happypack');
 const cpuLen = require('os').cpus().length;
@@ -21,7 +22,9 @@ const isDev = process.env.NODE_ENV === 'development';
 const webpackConfig = {
   mode: isDev ? 'development' : 'production',
   devtool: isDev ? "cheap-module-eval-source-map" : "none",
-  entry: './src/index',
+  entry: {
+    main: './src/index',
+  },
   devServer: devServer,
   cache: true,
   output: {
@@ -91,7 +94,9 @@ const webpackConfig = {
     new webpack.ProvidePlugin({
       React: 'react',
       Component: ['react', 'Component'],
-      PropTypes: 'prop-types'
+      lazy: ['react', 'lazy'],
+      PropTypes: 'prop-types',
+      styled: ['styled-components', 'default']
     }),
     new HappyPick({
       id: 'jsx',
@@ -113,8 +118,24 @@ const webpackConfig = {
       compilationSuccessInfo: {
         messages: [`Your applacation is running here ${devServer.host}:${devServer.port}`]
       }
-    })
-  ]
+    }),
+    new Visualizer({
+      filename: './statistics.html'
+    }),
+    new webpack.NamedModulesPlugin(),
+  ],
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vender: {
+          test: /node_modules/,
+          name: 'vender',
+          chunks: 'all'
+        },
+      }
+    },
+    runtimeChunk: 'single'
+  }
 }
 
 module.exports = webpackConfig;
