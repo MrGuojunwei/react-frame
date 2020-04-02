@@ -6,4 +6,5 @@ export { default as RadioForm } from './RadioForm';
 export { default as SwitchForm } from './SwitchForm';
 
 // 业务组件
-export { default as CustomTable} from './CustomTable';
+export { default as CustomTable } from './CustomTable';
+export { default as Title } from './Title';
