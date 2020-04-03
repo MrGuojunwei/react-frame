@@ -38,33 +38,9 @@ class BaseForm extends React.Component {
     }
 
     render() {
-        const {
-            extra = '',
-            hasFeedback = false,
-            help,
-            htmlFor,
-            label = '',
-            labelCol = {},
-            labelAlign = 'right',
-            required,
-            validateStatus,
-            wrapperCol = {},
-            colon = true,
-        } = this.props;
+        const { formItem } = this.props;
         return (
-            <FormItem
-                extra={extra}
-                hasFeedback={hasFeedback}
-                help={help}
-                htmlFor={htmlFor}
-                label={label}
-                labelCol={labelCol}
-                labelAlign={labelAlign}
-                required={required}
-                validateStatus={validateStatus}
-                wrapperCol={wrapperCol}
-                colon={colon}
-            >
+            <FormItem {...formItem}>
                 {this.getContent()}
             </FormItem>
         )
@@ -73,13 +49,13 @@ class BaseForm extends React.Component {
 }
 
 BaseForm.propTypes = {
-    id: PropTypes.string.isRequired,
-    form: PropTypes.object,
-    decorator: PropTypes.object,
-    status: PropTypes.string,
-    value: PropTypes.any,
-    defaultValue: PropTypes.any,
-    ...FormItem.propTypes
+    id: PropTypes.string.isRequired, // 表单绑定的数据
+    form: PropTypes.object, // 表单对象
+    decorator: PropTypes.object,// 表单装饰器
+    status: PropTypes.string, // 状态 
+    value: PropTypes.any, // 表单值
+    defaultValue: PropTypes.any, // 表单默认值
+    formItem: PropTypes.object // FormItem组件属性
 }
 
 BaseForm.defaultProps = {
@@ -89,7 +65,7 @@ BaseForm.defaultProps = {
     status: 'edit',
     value: undefined,
     defaultValue: undefined,
-    ...FormItem.defaultProps
+    formItem: {}
 }
 
 export default BaseForm;

@@ -96,5 +96,5 @@ const BreadcrumbWrap = styled(Breadcrumb)`
 `
 
 const ContentWrap = styled.div`
-    padding: 16px;
+    padding: 20px;
 `

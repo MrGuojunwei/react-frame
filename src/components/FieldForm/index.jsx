@@ -2,6 +2,7 @@ import InputForm from '../InputForm';
 import SelectForm from '../SelectForm';
 import RadioForm from '../RadioForm';
 import SwitchForm from '../SwitchForm';
+import CheckboxForm from '../CheckboxForm';
 
 class FieldForm extends Component {
 
@@ -16,6 +17,8 @@ class FieldForm extends Component {
       case 'select': return <SelectForm {...restProp} />;
       case 'radio': return <RadioForm {...restProp} />
       case 'switch': return <SwitchForm {...restProp} />;
+      case 'checkbox':
+      case 'totalCheckbox': return <CheckboxForm type={type} {...restProp} />
       default: return <InputForm type={type} {...restProp} />;
     }
   }
@@ -30,7 +33,7 @@ FieldForm.defaultProps = {
 }
 
 FieldForm.propTypes = {
-  type: PropTypes.oneOf(['input', 'password', 'textarea', 'number', 'search', 'select', 'radio', 'switch']),
+  type: PropTypes.oneOf(['input', 'password', 'textarea', 'number', 'search', 'select', 'radio', 'switch', 'checkbox', 'totalCheckbox']),
 }
 
 export default FieldForm;
