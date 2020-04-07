@@ -3,6 +3,8 @@ import SelectForm from '../SelectForm';
 import RadioForm from '../RadioForm';
 import SwitchForm from '../SwitchForm';
 import CheckboxForm from '../CheckboxForm';
+import DatePickerForm from '../DatePickerForm';
+import RateForm from '../RateForm';
 
 class FieldForm extends Component {
 
@@ -19,6 +21,11 @@ class FieldForm extends Component {
       case 'switch': return <SwitchForm {...restProp} />;
       case 'checkbox':
       case 'totalCheckbox': return <CheckboxForm type={type} {...restProp} />
+      case 'date':
+      case 'month':
+      case 'range':
+      case 'week': return <DatePickerForm type={type} {...restProp} />
+      case 'rate': return <RateForm {...restProp} />
       default: return <InputForm type={type} {...restProp} />;
     }
   }
@@ -33,7 +40,23 @@ FieldForm.defaultProps = {
 }
 
 FieldForm.propTypes = {
-  type: PropTypes.oneOf(['input', 'password', 'textarea', 'number', 'search', 'select', 'radio', 'switch', 'checkbox', 'totalCheckbox']),
+  type: PropTypes.oneOf([
+    'input',
+    'password',
+    'textarea',
+    'number',
+    'search',
+    'select',
+    'radio',
+    'switch',
+    'checkbox',
+    'totalCheckbox',
+    'date',
+    'month',
+    'range',
+    'week',
+    'rate'
+  ]),
 }
 
 export default FieldForm;

@@ -6,6 +6,8 @@ export { default as SelectForm } from './SelectForm';
 export { default as RadioForm } from './RadioForm';
 export { default as SwitchForm } from './SwitchForm';
 export { default as CheckboxForm } from './CheckboxForm';
+export { default as DatePickerForm } from './DatePickerForm';
+export { default as RateForm } from './RateForm';
 
 // 业务组件
 export { default as CustomTable } from './CustomTable';

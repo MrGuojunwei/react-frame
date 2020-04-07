@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
-import { Form, Row, Col, Input, Button } from 'antd';
+import { Form, Row, Col, Input, Button, ConfigProvider } from 'antd';
+import zh_CN from 'antd/es/locale/zh_CN';
 import SystemLayout from '@/layouts/SystemLayout';
 
 const User = lazy(() => import('@/pages/User'));
@@ -11,11 +12,14 @@ class App extends React.Component {
 
     render() {
         return (
-            <Suspense fallback={<div>loading</div>}>
-                <SystemLayout>
-                    <User />
-                </SystemLayout>
-            </Suspense>
+            <ConfigProvider locale={zh_CN}>
+                <Suspense fallback={<div>loading</div>}>
+                    <SystemLayout>
+                        <User />
+                    </SystemLayout>
+                </Suspense>
+            </ConfigProvider>
+
 
         )
     }

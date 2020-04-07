@@ -5,43 +5,7 @@
  * @lastEditTime: Do not edit
  */
 
-const _toString = Object.prototype.toString;
-
-export function _isDef(val) {
-  return val !== undefined && val !== null;
-}
-
-function _isUndef(val) {
-  return val === undefined || val === null;
-}
-
-function _isString(str) {
-  return _toString.call(str) === '[object String]';
-}
-
-function _isArray(arr) {
-  return _toString.call(arr) === '[object Array]';
-}
-
-function _isObject(obj) {
-  return obj !== null && typeof obj === 'object';
-}
-
-function _isPlainObject(obj) {
-  return _toString.call(obj) === '[object Object]';
-}
-
-function _isFunction(fn) {
-  return typeof fn === 'function';
-}
-
-function _isNotSpaceString(str) {
-  return isString(str) && str !== '';
-}
-
-function _isSpaceString(str) {
-  return isString(str) && str === '';
-}
+import { isUndef, isArray, isEmptyString } from './base';
 
 /**
 * @description 校验一个数组的某些字段是否必填
@@ -50,13 +14,13 @@ function _isSpaceString(str) {
 * @return {Boolean} true 校验通过 false 校验未通过
 */
 export function checkArray(array, fieldArray) {
-  if (!_isArray(array)) return false;
+  if (!isArray(array)) return false;
   fieldArray = fieldArray || Object.keys[array[0]];
   return array.every(item => {
     let flag = true;
     for (let i = 0; i < fieldArray.length; i++) {
       let val = item[fieldArray[i]];
-      if (_isUndef(val) || _isSpaceString(val)) {
+      if (isUndef(val) || isEmptyString(val)) {
         flag = false;
         break;
       };
@@ -75,7 +39,7 @@ export function checkArray(array, fieldArray) {
  * @return flag: undefined 参数不符合规则  true 存在相同对象  false不存在相同对象
  */
 export function isExistSameObject(arr1, arr2, field) {
-  if (!_isArray(arr1) || !_isArray(arr2) || _isUndef(field)) return;
+  if (!isArray(arr1) || !isArray(arr2) || isUndef(field)) return;
   let flag = false;
   for (let i = 0; i < arr1.length; i++) {
     let index = arr2.findIndex(item => item[field] === arr1[field]);
@@ -94,7 +58,7 @@ export function isExistSameObject(arr1, arr2, field) {
  * @return flag: undefined 参数不符合规则  true 存在相同值 false不存在相同值
  */
 export function isExistSameValue(arr1, arr2) {
-  if (!_isArray(arr1) || !_isArray(arr2)) return;
+  if (!isArray(arr1) || !isArray(arr2)) return;
   let flag = false;
   for (let i = 0; i < arr1.length; i++) {
     if (arr2.includes(arr1[i])) {
@@ -113,7 +77,7 @@ export function isExistSameValue(arr1, arr2) {
  * @return {Boolean} flag undefined 参数不符合规则 true表示包含所有  flag不包含所有
  */
 export function isSubArray(parentArray, subArray) {
-  if (!_isArray(parentArray) || !_isArray(subArray)) return;
+  if (!isArray(parentArray) || !isArray(subArray)) return;
   let flag = true;
   for (let i = 0; i < subArray.length; i++) {
     if (parentArray.indexOf(subArray[i]) < 0) {
@@ -131,8 +95,8 @@ export function isSubArray(parentArray, subArray) {
  */
 export function isSubInterval(parentInterval, subInterval) {
   if (
-    !_isArray(parentInterval) ||
-    !_isArray(subInterval) ||
+    !isArray(parentInterval) ||
+    !isArray(subInterval) ||
     parentInterval.length !== 2 ||
     subInterval.length !== 2
   ) {
@@ -149,13 +113,13 @@ export function isSubInterval(parentInterval, subInterval) {
  * @return Boolean true校验通过 无交叉  false 校验未通过  无交叉 undefined 参数格式不正确
  */
 export function checkTwoDimensionalArrayOverlapping(array) {
-  if (!_isArray(array)) { return; }
+  if (!isArray(array)) { return; }
   if (array.length <= 1) { return true; }
   let min = 0, max = 0, intervalArray = [];
 
   for (let i = 0; i < array.length; i++) {
     let itemArray = array[i];
-    if (!_isArray(itemArray) || itemArray.length !== 2) {
+    if (!isArray(itemArray) || itemArray.length !== 2) {
       return;
     }
 

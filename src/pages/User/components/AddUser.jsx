@@ -1,5 +1,6 @@
 import { FieldForm, Title, FieldFormWithCol } from '@/components';
 import { Form, Row, Col, Checkbox, Button } from 'antd';
+import { filterInvalidValue } from '@/utils/filters';
 
 const formItemLayout = {
     labelCol: {
@@ -62,8 +63,22 @@ class AddUser extends Component {
                         console.log(e)
                     }
                 }
+            },
+            {
+                type: 'week', id: 'date', col: 8, formItem: { label: '日期', ...formItemLayout }, config: {
+                    format: 'YYYY-MM-DD HH:mm'
+                }
+            },
+            {
+                type: 'rate', id: 'rate', col: 8, value: 2, formItem: { label: '评分', ...formItemLayout }
             }
         ]
+    }
+
+    getData = () => {
+        this.props.form.validateFields((error, values) => {
+            console.log(filterInvalidValue(values));
+        })
     }
 
     render() {
@@ -71,15 +86,25 @@ class AddUser extends Component {
             <div>
                 <Title text='查询条件'></Title>
                 <Form>
-                    {
-                        this.fields.map((field) => {
-                            return <FieldFormWithCol {...field} key={field.id} form={this.props.form} />
-                        })
-                    }
+                    <Row>
+                        {
+                            this.fields.map((field) => {
+                                return <FieldFormWithCol {...field} key={field.id} form={this.props.form} />
+                            })
+                        }
+                    </Row>
+                    <RowStyle>
+                        <Button onClick={this.getData}>按钮</Button>
+                    </RowStyle>
+
                 </Form>
             </div>
         )
     }
 }
+
+const RowStyle = styled(Row)`
+    text-align: center;
+`
 
 export default Form.create()(AddUser);
