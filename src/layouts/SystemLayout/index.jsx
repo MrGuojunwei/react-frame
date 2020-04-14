@@ -1,6 +1,7 @@
 import { Layout, Menu, Icon, Breadcrumb } from 'antd';
 import MenuItem from 'antd/lib/menu/MenuItem';
 import SubMenu from 'antd/lib/menu/SubMenu';
+import { Container } from '@/components';
 const { Header, Sider, Content } = Layout;
 
 class SystemLayout extends Component {
@@ -21,7 +22,7 @@ class SystemLayout extends Component {
                 </HeaderLayout>
                 <Layout>
                     <SiderLayout>
-                        <Menu mode='inline' style={{ height: '100%' }}>
+                        <Menu mode='inline' theme="dark" style={{ height: '100%' }}>
                             <SubMenu title={
                                 <span>
                                     <Icon type="mail" />
@@ -37,11 +38,16 @@ class SystemLayout extends Component {
                     </SiderLayout>
                     <ContentLayout>
                         <BreadcrumbWrap>
-                            <Breadcrumb.Item>Home</Breadcrumb.Item>
-                            <Breadcrumb.Item>Application Center</Breadcrumb.Item>
-                            <Breadcrumb.Item>Application List</Breadcrumb.Item>
-                            <Breadcrumb.Item>An AppFlication</Breadcrumb.Item>
+                            <Container>
+                                <Breadcrumb>
+                                    <Breadcrumb.Item>Home</Breadcrumb.Item>
+                                    <Breadcrumb.Item>Application Center</Breadcrumb.Item>
+                                    <Breadcrumb.Item>Application List</Breadcrumb.Item>
+                                    <Breadcrumb.Item>An AppFlication</Breadcrumb.Item>
+                                </Breadcrumb>
+                            </Container>
                         </BreadcrumbWrap>
+
                         <ContentWrap>
                             {this.props.children}
                         </ContentWrap>
@@ -71,7 +77,6 @@ const HeaderLayout = styled(Header)`
     left: 0;
     right: 0;
     height: ${headerHeight};
-    background: '#fff';
 `
 
 const SiderLayout = styled(Sider)`
@@ -88,10 +93,11 @@ const ContentLayout = styled(Content)`
     left: ${siderWidth};
     right: 0;
     bottom: 0;
+    background-color: #ececec;
 `
 
-const BreadcrumbWrap = styled(Breadcrumb)`
-    margin: 16px 0 16px 16px;
+const BreadcrumbWrap = styled.div`
+    margin: 20px 20px 0 20px;
 
 `
 
