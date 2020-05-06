@@ -8,6 +8,7 @@ import RateForm from '../RateForm';
 import TreeSelectForm from '../TreeSelectForm';
 import CascaderForm from '../CascaderForm';
 import SliderForm from '../SliderForm';
+import TimePickerForm from '../TimePickerForm';
 
 class FieldForm extends Component {
 
@@ -32,6 +33,8 @@ class FieldForm extends Component {
       case 'treeSelect': return <TreeSelectForm {...restProp} />
       case 'cascader': return <CascaderForm {...restProp} />
       case 'slider': return <SliderForm {...restProp} />
+      case 'time':
+      case 'TimePicker': return <TimePickerForm {...restProp} />
       default: return <InputForm type={type} {...restProp} />;
     }
   }
@@ -65,6 +68,8 @@ FieldForm.propTypes = {
     'treeSelect',
     'cascader',
     'slider',
+    'time',
+    'timePicker'
   ]),
 }
 

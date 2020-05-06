@@ -11,6 +11,7 @@ export { default as RateForm } from './RateForm';
 export { default as TreeSelectForm } from './TreeSelectForm';
 export { default as CascaderForm } from './CascaderForm';
 export { default as SliderForm } from './SliderForm';
+export { default as TimePickerForm } from './TimePickerForm';
 
 // 业务组件
 export { default as CustomTable } from './CustomTable';

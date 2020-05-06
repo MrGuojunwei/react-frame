@@ -154,6 +154,12 @@ class User extends Component {
                         }
                     ]
                 }
+            },
+            {
+                type: 'time', id: 'time', col: 8, formItem: { label: '时间', ...formItemLayout },
+                config: {
+                    style: {width: '100%'}
+                }
             }
         ]
     }
