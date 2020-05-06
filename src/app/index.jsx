@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import { Form, Row, Col, Input, Button, ConfigProvider } from 'antd';
 import zh_CN from 'antd/es/locale/zh_CN';
 import SystemLayout from '@/layouts/SystemLayout';
+import './index.less';
 
 const User = lazy(() => import('@/pages/User'));
 

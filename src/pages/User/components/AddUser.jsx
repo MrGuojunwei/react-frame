@@ -1,4 +1,4 @@
-import { FieldForm, Title, FieldFormWithCol } from '@/components';
+import { FieldForm, Title, FieldFormWithCol, ButtonWrap, Container } from '@/components';
 import { Form, Row, Col, Checkbox, Button } from 'antd';
 import { filterInvalidValue } from '@/utils/filters';
 
@@ -92,6 +92,10 @@ class AddUser extends Component {
                     onChange: (e) => {
                         console.log(e)
                     }
+                }, decorator: {
+                    rules: [
+                        { required: true, message: '必填' }
+                    ]
                 }
             },
             {
@@ -109,6 +113,47 @@ class AddUser extends Component {
                 }, config: {
                     treeData: this.state.treeData
                 }
+            },
+            {
+                type: 'input', id: 'name', col: 8, formItem: { label: '姓名', ...formItemLayout }, decorator: {
+                    rules: [
+                        { required: true, message: '必填' }
+                    ]
+                }
+            },
+            {
+                type: 'cascader', id: 'cascader', col: 8, formItem: { label: '树', ...formItemLayout }, valueField: 'aaa', labelField: 'bbb', childrenField: 'ccc', config: {
+                    options: [
+                        {
+                            aaa: 'label1',
+                            bbb: 'value1',
+                            ccc: [
+                                {
+                                    aaa: 'label1-1',
+                                    bbb: 'value1-1'
+                                },
+                                {
+                                    aaa: 'label1-2',
+                                    bbb: 'value1-2'
+                                }
+                            ]
+                        },
+                        {
+                            aaa: 'label2',
+                            bbb: 'value2',
+                            ccc: [
+                                {
+                                    aaa: 'label2-1',
+                                    bbb: 'value2-1'
+                                },
+                                {
+                                    aaa: 'label2-2',
+                                    bbb: 'value2-2'
+                                }
+                            ]
+                        }
+                    ]
+                }
             }
         ]
     }
@@ -122,20 +167,31 @@ class AddUser extends Component {
     render() {
         return (
             <div>
-                <Title text='查询条件'></Title>
-                <Form>
-                    <Row>
-                        {
-                            this.fields.map((field) => {
-                                return <FieldFormWithCol {...field} key={field.id} form={this.props.form} />
-                            })
-                        }
-                    </Row>
-                    <RowStyle>
-                        <Button onClick={this.getData}>按钮</Button>
-                    </RowStyle>
+                <Container>
+                    <Title text='查询条件' />
+                    <Form>
+                        <Row>
+                            {
+                                this.fields.map((field) => {
+                                    return <FieldFormWithCol {...field} key={field.id} form={this.props.form} />
+                                })
+                            }
+                        </Row>
+                        <RowStyle>
+                            <ButtonWrap>
+                                <Button onClick={this.getData} type='primary'>查询</Button>
+                                <Button onClick={this.getData} type='primary'>重置</Button>
+                                <Button onClick={this.getData} type='primary'>导出</Button>
+                            </ButtonWrap>
+                        </RowStyle>
+                    </Form>
+                </Container>
 
-                </Form>
+                <ListWrap>
+                    <Container>
+                        <Title text='查询结果' />
+                    </Container>
+                </ListWrap>
             </div>
         )
     }
@@ -143,6 +199,10 @@ class AddUser extends Component {
 
 const RowStyle = styled(Row)`
     text-align: center;
+`
+
+const ListWrap = styled.div`
+    margin-top: 20px;
 `
 
 export default Form.create()(AddUser);

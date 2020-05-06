@@ -6,6 +6,8 @@ import CheckboxForm from '../CheckboxForm';
 import DatePickerForm from '../DatePickerForm';
 import RateForm from '../RateForm';
 import TreeSelectForm from '../TreeSelectForm';
+import CascaderForm from '../CascaderForm';
+import SliderForm from '../SliderForm';
 
 class FieldForm extends Component {
 
@@ -28,6 +30,8 @@ class FieldForm extends Component {
       case 'week': return <DatePickerForm type={type} {...restProp} />
       case 'rate': return <RateForm {...restProp} />
       case 'treeSelect': return <TreeSelectForm {...restProp} />
+      case 'cascader': return <CascaderForm {...restProp} />
+      case 'slider': return <SliderForm {...restProp} />
       default: return <InputForm type={type} {...restProp} />;
     }
   }
@@ -58,7 +62,9 @@ FieldForm.propTypes = {
     'range',
     'week',
     'rate',
-    'treeSelect'
+    'treeSelect',
+    'cascader',
+    'slider',
   ]),
 }
 
