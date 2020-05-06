@@ -15,7 +15,37 @@ class AddUser extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            checkbox: ['red', 'green']
+            checkbox: ['red', 'green'],
+            treeData: [
+                {
+                    name: '电子设备',
+                    code: '01',
+                    children: [
+                        {
+                            name: '手机',
+                            code: '01-01'
+                        },
+                        {
+                            name: '电脑',
+                            code: '01-02'
+                        }
+                    ]
+                },
+                {
+                    name: '衣服',
+                    code: '02',
+                    children: [
+                        {
+                            name: '上衣',
+                            code: '02-01'
+                        },
+                        {
+                            name: '裤子',
+                            code: '02-02'
+                        }
+                    ]
+                }
+            ]
         }
 
         this.fields = [
@@ -66,11 +96,19 @@ class AddUser extends Component {
             },
             {
                 type: 'week', id: 'date', col: 8, formItem: { label: '日期', ...formItemLayout }, config: {
-                    format: 'YYYY-MM-DD HH:mm'
+                    format: 'YYYY-MM-DD HH:mm',
+                    style: { width: '100%' }
                 }
             },
             {
                 type: 'rate', id: 'rate', col: 8, value: 2, formItem: { label: '评分', ...formItemLayout }
+            },
+            {
+                type: 'treeSelect', id: 'treeSelect', col: 8, valueField: 'code', labelField: 'name', formItem: {
+                    label: '树选择器', ...formItemLayout
+                }, config: {
+                    treeData: this.state.treeData
+                }
             }
         ]
     }

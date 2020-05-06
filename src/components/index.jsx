@@ -8,6 +8,7 @@ export { default as SwitchForm } from './SwitchForm';
 export { default as CheckboxForm } from './CheckboxForm';
 export { default as DatePickerForm } from './DatePickerForm';
 export { default as RateForm } from './RateForm';
+export { default as TreeSelectForm } from './TreeSelectForm';
 
 // 业务组件
 export { default as CustomTable } from './CustomTable';
