@@ -9,6 +9,7 @@ import TreeSelectForm from '../TreeSelectForm';
 import CascaderForm from '../CascaderForm';
 import SliderForm from '../SliderForm';
 import TimePickerForm from '../TimePickerForm';
+import UploadForm from '../UploadForm';
 
 class FieldForm extends Component {
 
@@ -35,6 +36,7 @@ class FieldForm extends Component {
       case 'slider': return <SliderForm {...restProp} />
       case 'time':
       case 'TimePicker': return <TimePickerForm {...restProp} />
+      case 'upload': return <UploadForm {...restProp} />
       default: return <InputForm type={type} {...restProp} />;
     }
   }
@@ -69,7 +71,8 @@ FieldForm.propTypes = {
     'cascader',
     'slider',
     'time',
-    'timePicker'
+    'timePicker',
+    'upload'
   ]),
 }
 

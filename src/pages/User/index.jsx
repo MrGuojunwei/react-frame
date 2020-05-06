@@ -158,8 +158,11 @@ class User extends Component {
             {
                 type: 'time', id: 'time', col: 8, formItem: { label: '时间', ...formItemLayout },
                 config: {
-                    style: {width: '100%'}
+                    style: { width: '100%' }
                 }
+            },
+            {
+                type: 'upload', id: 'upload', col: 8, formItem: { label: '上传', ...formItemLayout }, children: this.getUploadChild()
             }
         ]
     }
@@ -168,6 +171,10 @@ class User extends Component {
         this.props.form.validateFields((error, values) => {
             console.log(filterInvalidValue(values));
         })
+    }
+
+    getUploadChild = () => {
+        return <Button>上传</Button>
     }
 
     render() {
